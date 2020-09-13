@@ -10,7 +10,7 @@
 
     <style>
         html {
-            background: url(./placeholder.jpg) no-repeat center center fixed;
+            background: no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -110,6 +110,7 @@
     document.addEventListener("DOMContentLoaded", function() {
 
         debugLog()
+        initState()
 
         const modelChoice = document.getElementsByName('modelChoice');
         const imageChangeButtons = document.querySelectorAll(".button");
@@ -123,9 +124,14 @@
         }
     });
 
+
+    function initState() {
+        state.currentImageUri = getReferenceImageUri()
+        updateReferenceImage()
+    }
+
     function modelChoiceHandler() {
         const modelChoice = document.getElementsByName('modelChoice');
-        updateReferenceImage()
         for (var i = 0, length = modelChoice.length; i < length; i++) {
             if (modelChoice[i].checked) {
                 state.model = modelChoice[i].value
