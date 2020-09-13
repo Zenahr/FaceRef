@@ -6,65 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#5c004c">
     <title>FaceShadow</title>
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="switch.css">
-
-    <style>
-        html {
-            background: no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-            background-color: #3b3b3b;
-            opacity: 1;
-            transition: opacity 0.3s;
-        }
-        
-        .grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-        }
-        
-        .button {
-            flex: 0 0 32%;
-            /* don't grow, don't shrink, width */
-            min-height: 28vh;
-            margin-top: 6px;
-            margin-bottom: 4px;
-            background: transparent;
-            border: none !important;
-            font-size: 0;
-            outline: none;
-        }
-        /* Place the navbar at the bottom of the page, and make it stick */
-        
-        .navbar {
-            background-color: #333;
-            overflow: hidden;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-        /* Style the links inside the navigation bar */
-        
-        .navbar a {
-            float: left;
-            display: block;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-        }
-        /* Change the color of links on hover */
-        
-        .navbar a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-        /* Add a color to the active/current link */
-    </style>
 </head>
 
 <body>
@@ -80,6 +23,18 @@
 
             <input type="radio" id="placeholder" name="modelChoice" value="placeholder">
             <label for="placeholder">placeholder</label>
+        </div>
+
+        <div class="switch-toggle switch-3 switch-candy">
+            <input type="radio" id="outline" name="renderChoice" value="outline">
+            <label for="outline">outline</label>
+
+            <input type="radio" id="w/ shadow lines" name="renderChoice" value="w/ shadow lines">
+            <label for="w/ shadow lines">w/ shadow lines</label>
+
+
+            <input type="radio" id="w/ shadow shapes" name="renderChoice" value="w/ shadow shapes">
+            <label for="w/ shadow shapes">w/ shadow shapes</label>
         </div>
 
         <a href="#news"></a>
