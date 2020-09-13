@@ -104,6 +104,7 @@
         model: "placeholder", // Supported models: female, male, cube, placeholder (DEBUG)
         withShadowLine: false,
         withShadowShape: false,
+        currentImageUri: ""
     }
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -146,13 +147,16 @@
     }
 
     function updateReferenceImage() {
-        document.documentElement.style.backgroundImage = getReferenceImageUri();
+        let uri = getReferenceImageUri();
+        document.documentElement.style.backgroundImage = uri
+        state.currentImageUri = uri
         debugLog()
     }
 
     function getReferenceImageUri() {
         let fileExtension = ".jpg"
-        let uri = "url(" + "'" + state.model + "-" + state.index + fileExtension + "'" + ")"
+        let folder = "./model/"
+        let uri = "url(" + "'" + folder + state.model + "/" + state.model + "-" + state.index + fileExtension + "'" + ")"
         console.log("URI:", uri)
         return uri
     }
