@@ -30,7 +30,7 @@
             <label for="outline">outline</label>
 
             <input type="radio" id="w/ shadow lines" name="renderChoice" value="w/ shadow lines">
-            <label for="w/ shadow lines">w/ shadow lines</label>
+            <label for="w/ shadow lines">w/ shadow outline</label>
 
 
             <input type="radio" id="w/ shadow shapes" name="renderChoice" value="w/ shadow shapes">
@@ -57,9 +57,11 @@
     state = {
         index: 5,
         model: "placeholder", // Supported models: female, male, cube, placeholder (DEBUG)
-        withShadowLine: false,
-        withShadowShape: false,
-        currentImageUri: ""
+        renderMode: "o", // supported render modes: o (outline), osl (outline + shadow line), oss (outline + shadow shape)
+        currentImageUri: "",
+        updateRenderMode: (newRenderMode) => {
+            state.renderMode = newRenderMode;
+        }
     }
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -68,6 +70,7 @@
         initState()
 
         const modelChoice = document.getElementsByName('modelChoice');
+        const renderChoice = document.getElementsByName('renderChoice');
         const imageChangeButtons = document.querySelectorAll(".button");
 
         for (var i = 0; i < imageChangeButtons.length; i++) {
@@ -76,6 +79,10 @@
 
         for (var i = 0; i < modelChoice.length; i++) {
             modelChoice[i].addEventListener('click', modelChoiceHandler, false);
+        }
+
+        for (var i = 0; i < renderChoice.length; i++) {
+            renderChoice[i].addEventListener('click', renderChoiceHandler, false);
         }
     });
 
@@ -96,6 +103,17 @@
         }
     }
 
+    function renderChoiceHandler(event) {
+        const renderChoice = document.getElementsByName('renderChoice');
+        for (var i = 0, length = renderChoice.length; i < length; i++) {
+            if (renderChoice[i].checked) {
+                state.updateRenderMode(renderChoice[i].value)
+                updateRenderMode()
+                break;
+            }
+        }
+    }
+
     function debugLog() {
         console.clear()
         console.log("APPLICATION STATE:")
@@ -109,6 +127,17 @@
         debugLog()
     }
 
+    function getRenderModeUriPart() {
+        let renderMode = state.renderMode
+        if (renderMode == "o") {
+            return ""
+        } else if (renderMode == osl) {
+            return "-sl"
+        } else if (renderMode == oss) {
+            return "-ss"
+        }
+    }
+
     function updateReferenceImage() {
         state.currentImageUri = getReferenceImageUri();
         document.documentElement.style.backgroundImage = state.currentImageUri
@@ -118,7 +147,7 @@
     function getReferenceImageUri() {
         let fileExtension = ".jpg"
         let folder = "./model/"
-        let uri = "url(" + "'" + folder + state.model + "/" + state.model + "-" + state.index + fileExtension + "'" + ")"
+        let uri = "url(" + "'" + folder + state.model + "/" + state.model + "-" + state.index + fileExtension + getRenderModeUriPart() + "'" + ")"
         console.log("URI:", uri)
         return uri
     }
