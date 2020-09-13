@@ -73,9 +73,7 @@
     }
 
     function imageHandler(event) {
-        let imageQuery = event.target.value
-        console.log("image query: " + imageQuery)
-        state.index = imageQuery
+        state.index = event.target.value
         document.documentElement.style.backgroundImage = getReferenceImageUri();
         event.preventDefault()
         debugLog()
