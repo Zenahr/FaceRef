@@ -71,14 +71,14 @@
 
     <div class="navbar">
         <div class="switch-toggle switch-3 switch-candy">
-            <input type="radio" id="female" name="model" value="female">
+            <input type="radio" id="female" name="modelChoice" value="female">
             <label for="female">Female</label>
 
-            <input type="radio" id="male" name="model" value="male">
+            <input type="radio" id="male" name="modelChoice" value="male">
             <label for="male">Male</label>
 
 
-            <input type="radio" id="placeholder" name="model" value="placeholder">
+            <input type="radio" id="placeholder" name="modelChoice" value="placeholder">
             <label for="placeholder">placeholder</label>
         </div>
 
@@ -108,26 +108,33 @@
 
     document.addEventListener("DOMContentLoaded", function() {
 
-        const modelSelectors = document.querySelectorAll("input");
+        debugLog()
+
+        const modelChoice = document.getElementsByName('modelChoice');
         const imageChangeButtons = document.querySelectorAll(".button");
 
         for (var i = 0; i < imageChangeButtons.length; i++) {
             imageChangeButtons[i].addEventListener('click', imageHandler, false);
         }
 
-        for (var i = 0; i < modelSelectors.length; i++) {
-            modelSelectors[i].addEventListener('click', modelHandler, false);
+        for (var i = 0; i < modelChoice.length; i++) {
+            modelChoice[i].addEventListener('click', modelChoiceHandler, false);
         }
-
     });
 
-
-    function modelHandler(event) {
-        state.model = event.target.name
+    function modelChoiceHandler() {
+        const modelChoice = document.getElementsByName('modelChoice');
+        for (var i = 0, length = modelChoice.length; i < length; i++) {
+            if (modelChoice[i].checked) {
+                state.model = modelChoice[i].value
+                break;
+            }
+        }
     }
 
     function debugLog() {
         console.clear()
+        console.log("APPLICATION STATE:")
         console.table(state)
     }
 
