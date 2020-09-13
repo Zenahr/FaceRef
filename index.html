@@ -53,7 +53,8 @@
     </div>
 </body>
 <script>
-    let state = {
+    state = {
+        index: 5,
         model: "female", // Supported models: female, male, cube, placeholder (DEBUG)
         withShadowLine: false,
         withShadowShape: false,
@@ -66,18 +67,23 @@
         }
     });
 
+    function debugLog() {
+        console.clear()
+        console.table(state)
+    }
+
     function imageHandler(event) {
         let imageQuery = event.target.value
         console.log("image query: " + imageQuery)
-        document.documentElement.style.backgroundImage = getReferenceImageUri(imageQuery);
-
+        state.index = imageQuery
+        document.documentElement.style.backgroundImage = getReferenceImageUri();
         event.preventDefault()
+        debugLog()
     }
 
-    function getReferenceImageUri(imageQuery) {
-        let referenceType = "placeholder"
+    function getReferenceImageUri() {
         let fileExtension = ".jpg"
-        let uri = "url(" + "'" + referenceType + "-" + imageQuery + fileExtension + "'" + ")"
+        let uri = "url(" + "'" + state.model + "-" + state.index + fileExtension + "'" + ")"
         console.log("URI:", uri)
         return uri
     }
