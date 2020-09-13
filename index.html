@@ -26,14 +26,14 @@
         </div>
 
         <div class="switch-toggle switch-3 switch-candy">
-            <input type="radio" id="outline" name="renderChoice" value="outline">
+            <input type="radio" id="outline" name="renderChoice" value="o">
             <label for="outline">outline</label>
 
-            <input type="radio" id="w/ shadow lines" name="renderChoice" value="w/ shadow lines">
+            <input type="radio" id="w/ shadow lines" name="renderChoice" value="osl">
             <label for="w/ shadow lines">w/ shadow outline</label>
 
 
-            <input type="radio" id="w/ shadow shapes" name="renderChoice" value="w/ shadow shapes">
+            <input type="radio" id="w/ shadow shapes" name="renderChoice" value="oss">
             <label for="w/ shadow shapes">w/ shadow shapes</label>
         </div>
 
@@ -111,7 +111,7 @@
         for (var i = 0, length = renderChoice.length; i < length; i++) {
             if (renderChoice[i].checked) {
                 state.updateRenderMode(renderChoice[i].value)
-                updateRenderMode()
+                updateReferenceImage()
                 break;
             }
         }
@@ -134,9 +134,9 @@
         let renderMode = state.renderMode
         if (renderMode == "o") {
             return ""
-        } else if (renderMode == osl) {
+        } else if (renderMode == "osl") {
             return "-sl"
-        } else if (renderMode == oss) {
+        } else if (renderMode == "oss") {
             return "-ss"
         }
     }
@@ -150,7 +150,7 @@
     function getReferenceImageUri() {
         let fileExtension = ".jpg"
         let folder = "./model/"
-        let uri = "url(" + "'" + folder + state.model + "/" + state.model + "-" + state.index + fileExtension + getRenderModeUriPart() + "'" + ")"
+        let uri = "url(" + "'" + folder + state.model + "/" + state.model + "-" + state.index + getRenderModeUriPart() + fileExtension + "'" + ")"
         console.log("URI:", uri)
         return uri
     }
