@@ -11,26 +11,18 @@
         body {
             background-color: #2b2b2b;
         }
+        
+        html {
+            background: url(./placeholder.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
     </style>
 </head>
 
 <body>
-    <a href="http://www.uplabs.com/posts/bottom-navigation-exploration-for-urbanclap" target="_blank">Inspired by Fozail Ahmed</a>
-    <div id="navigation-wrapper">
-        <h3>BOTTOM NAVIGATION</h3>
-        <div class="navigation">
-            <div class="navigation-content" v-bind:class="{'first-color': navigation[0].selected, 'second-color': navigation[1].selected, 'third-color': navigation[2].selected, 'fourth-color': navigation[3].selected}">
-            </div>
-            <div class="navigation-buttons">
-                <ul>
-                    <li v-for="nav_item in navigation" v-bind:class="{'selected': nav_item.selected}" v-on:click="selectItem($index)">
-                        <i class="material-icons">{{nav_item.icon}}</i>
-                        <p>{{nav_item.name}}</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
 </body>
 <script>
 </script>
