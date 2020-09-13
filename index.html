@@ -14,6 +14,9 @@
             -moz-background-size: cover;
             -o-background-size: cover;
             background-size: cover;
+            background-color: #3b3b3b;
+            opacity: 1;
+            transition: opacity 0.3s;
         }
         
         .grid {
@@ -50,6 +53,12 @@
     </div>
 </body>
 <script>
+    let state = {
+        model: "female", // Supported models: female, male, cube, placeholder (DEBUG)
+        withShadowLine: false,
+        withShadowShape: false,
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
         const imageChangeButtons = document.querySelectorAll(".button");
         for (var i = 0; i < imageChangeButtons.length; i++) {
@@ -60,13 +69,13 @@
     function imageHandler(event) {
         let imageQuery = event.target.value
         console.log("image query: " + imageQuery)
-
         document.documentElement.style.backgroundImage = getReferenceImageUri(imageQuery);
+
         event.preventDefault()
     }
 
     function getReferenceImageUri(imageQuery) {
-        let referenceType = "cube"
+        let referenceType = "placeholder"
         let fileExtension = ".jpg"
         let uri = "url(" + "'" + referenceType + "-" + imageQuery + fileExtension + "'" + ")"
         console.log("URI:", uri)
