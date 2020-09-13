@@ -127,6 +127,7 @@
         for (var i = 0, length = modelChoice.length; i < length; i++) {
             if (modelChoice[i].checked) {
                 state.model = modelChoice[i].value
+                updateReferenceImage()
                 break;
             }
         }
@@ -140,8 +141,12 @@
 
     function imageHandler(event) {
         state.index = event.target.value
-        document.documentElement.style.backgroundImage = getReferenceImageUri();
         event.preventDefault()
+        debugLog()
+    }
+
+    function updateReferenceImage() {
+        document.documentElement.style.backgroundImage = getReferenceImageUri();
         debugLog()
     }
 
