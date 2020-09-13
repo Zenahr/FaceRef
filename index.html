@@ -60,6 +60,7 @@
     function imageHandler(event) {
         let imageQuery = event.target.value
         console.log("image query: " + imageQuery)
+
         document.documentElement.style.backgroundImage = getReferenceImageUri(imageQuery);
         event.preventDefault()
     }
@@ -67,7 +68,8 @@
     function getReferenceImageUri(imageQuery) {
         let referenceType = "cube"
         let fileExtension = ".jpg"
-        let uri = [""].join(["url(", "'", referenceType, "-", imageQuery, fileExtension, "'", ")"])
+        let uri = "url(" + "'" + referenceType + "-" + imageQuery + fileExtension + "'" + ")"
+        console.log("URI:", uri)
         return uri
     }
 </script>
