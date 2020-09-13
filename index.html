@@ -64,23 +64,26 @@
             color: black;
         }
         /* Add a color to the active/current link */
-        
-        .navbar a.active {
-            color: white;
-        }
     </style>
 </head>
 
 <body>
 
     <div class="navbar">
-        <label class="switch">
-            <input type="checkbox">
-            <span class="slider"></span>
-          </label>
+        <div class="switch-toggle switch-3 switch-candy">
+            <input type="radio" id="female" name="model" value="female">
+            <label for="female">Female</label>
 
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
+            <input type="radio" id="male" name="model" value="male">
+            <label for="male">Male</label>
+
+
+            <input type="radio" id="placeholder" name="model" value="placeholder">
+            <label for="placeholder">placeholder</label>
+        </div>
+
+        <a href="#news"></a>
+        <a href="#contact"></a>
     </div>
 
     <div class="grid">
@@ -98,17 +101,30 @@
 <script>
     state = {
         index: 5,
-        model: "female", // Supported models: female, male, cube, placeholder (DEBUG)
+        model: "placeholder", // Supported models: female, male, cube, placeholder (DEBUG)
         withShadowLine: false,
         withShadowShape: false,
     }
 
     document.addEventListener("DOMContentLoaded", function() {
+
+        const modelSelectors = document.querySelectorAll("input");
         const imageChangeButtons = document.querySelectorAll(".button");
+
         for (var i = 0; i < imageChangeButtons.length; i++) {
             imageChangeButtons[i].addEventListener('click', imageHandler, false);
         }
+
+        for (var i = 0; i < modelSelectors.length; i++) {
+            modelSelectors[i].addEventListener('click', modelHandler, false);
+        }
+
     });
+
+
+    function modelHandler(event) {
+        state.model = event.target.name
+    }
 
     function debugLog() {
         console.clear()
