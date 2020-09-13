@@ -58,10 +58,17 @@
     });
 
     function imageHandler(event) {
-        imageQuery = event.target.value
+        let imageQuery = event.target.value
         console.log("image query: " + imageQuery)
-        document.documentElement.style.backgroundImage = "url('img_tree.png')";
+        document.documentElement.style.backgroundImage = getReferenceImageUri(imageQuery);
         event.preventDefault()
+    }
+
+    function getReferenceImageUri(imageQuery) {
+        let referenceType = "cube"
+        let fileExtension = ".jpg"
+        let uri = [""].join(["url(", "'", referenceType, "-", imageQuery, fileExtension, "'", ")"])
+        return uri
     }
 </script>
 
