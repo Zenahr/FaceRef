@@ -35,6 +35,12 @@
 
             <input type="radio" id="w/ shadow shapes" name="renderChoice" value="oss">
             <label for="w/ shadow shapes">w/ shadow shapes</label>
+
+            <input type="radio" id="directionModeFace" name="directionMode" value="face">
+            <label for="faceDirectionFlag">change face direction</label>
+
+            <input type="radio" id="directionModeShadow" name="directionMode" value="shadow">
+            <label for="shadowDirectionFlag">change shadow direction</label>
         </div>
 
         <a href="#news"></a>
@@ -60,6 +66,7 @@
         model: "placeholder", // Supported models: female, male, cube, placeholder (DEBUG)
         renderMode: "o", // supported render modes: o (outline), osl (outline + shadow line), oss (outline + shadow shape)
         currentImageUri: "",
+        directionMode: "shadow",
         updateRenderMode: (newRenderMode) => {
             state.renderMode = newRenderMode;
         },
@@ -75,6 +82,7 @@
 
         const modelChoice = document.getElementsByName('modelChoice');
         const renderChoice = document.getElementsByName('renderChoice');
+        const directionModeSwitch = document.getElementsByName('directionMode');
         const imageChangeButtons = document.querySelectorAll(".button");
 
         for (var i = 0; i < imageChangeButtons.length; i++) {
@@ -88,12 +96,27 @@
         for (var i = 0; i < renderChoice.length; i++) {
             renderChoice[i].addEventListener('click', renderChoiceHandler, false);
         }
+
+        for (var i = 0; i < directionModeSwitch.length; i++) {
+            directionModeSwitch[i].addEventListener('click', directionModeHandler, false);
+        }
     });
 
 
     function initState() {
         state.currentImageUri = getReferenceImageUri()
         updateReferenceImage()
+    }
+
+    function directionModeHandler() {
+        const directionModeChoice = document.getElementsByName('directionModeChoice');
+        for (var i = 0, length = directionModeChoice.length; i < length; i++) {
+            if (modelChoice[i].checked) {
+                state.directionMode = directionModeChoice[i].value
+                updateReferenceImage()
+                break;
+            }
+        }
     }
 
     function modelChoiceHandler() {
@@ -125,20 +148,24 @@
     }
 
     function imageHandler(event) {
-        state.faceDirectionIndex = event.target.value
+        if (state.directionMode == "face") {
+            state.faceDirectionIndex = event.target.value
+        } else if (state.directionMode == "shadow") {
+            state.shadowDirectionIndex = event.target.value
+        }
         event.preventDefault()
         updateReferenceImage()
         debugLog()
     }
 
-    function getRenderModeUriPart() {
+    function getUri() {
         let renderMode = state.renderMode
         if (renderMode == "o") {
             return ""
         } else if (renderMode == "osl") {
-            return "-sl"
+            return "-sl-" + state.shadowDirectionIndex
         } else if (renderMode == "oss") {
-            return "-ss"
+            return "-ss-" + state.shadowDirectionIndex
         }
     }
 
@@ -151,7 +178,7 @@
     function getReferenceImageUri() {
         let fileExtension = ".jpg"
         let folder = "./model/"
-        let uri = "url(" + "'" + folder + state.model + "/" + state.model + "-" + state.faceDirectionIndex + getRenderModeUriPart() + fileExtension + "'" + ")"
+        let uri = "url(" + "'" + folder + state.model + "/" + state.model + "-" + state.faceDirectionIndex + getUri() + fileExtension + "'" + ")"
         console.log("URI:", uri)
         return uri
     }
