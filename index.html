@@ -55,7 +55,8 @@
 </body>
 <script>
     state = {
-        index: 5,
+        faceDirectionIndex: 5,
+        shadowDirectionIndex: 5,
         model: "placeholder", // Supported models: female, male, cube, placeholder (DEBUG)
         renderMode: "o", // supported render modes: o (outline), osl (outline + shadow line), oss (outline + shadow shape)
         currentImageUri: "",
@@ -124,7 +125,7 @@
     }
 
     function imageHandler(event) {
-        state.index = event.target.value
+        state.faceDirectionIndex = event.target.value
         event.preventDefault()
         updateReferenceImage()
         debugLog()
@@ -150,7 +151,7 @@
     function getReferenceImageUri() {
         let fileExtension = ".jpg"
         let folder = "./model/"
-        let uri = "url(" + "'" + folder + state.model + "/" + state.model + "-" + state.index + getRenderModeUriPart() + fileExtension + "'" + ")"
+        let uri = "url(" + "'" + folder + state.model + "/" + state.model + "-" + state.faceDirectionIndex + getRenderModeUriPart() + fileExtension + "'" + ")"
         console.log("URI:", uri)
         return uri
     }
