@@ -37,10 +37,10 @@
             <label for="w/ shadow shapes">w/ shadow shapes</label>
 
             <input type="radio" id="directionModeFace" name="directionMode" value="face">
-            <label for="faceDirectionFlag">change face direction</label>
+            <label for="directionModeFace">change face direction</label>
 
             <input type="radio" id="directionModeShadow" name="directionMode" value="shadow">
-            <label for="shadowDirectionFlag">change shadow direction</label>
+            <label for="directionModeShadow">change shadow direction</label>
         </div>
 
         <a href="#news"></a>
@@ -104,14 +104,15 @@
 
 
     function initState() {
+        console.log("initial state set.")
         state.currentImageUri = getReferenceImageUri()
         updateReferenceImage()
     }
 
     function directionModeHandler() {
-        const directionModeChoice = document.getElementsByName('directionModeChoice');
+        const directionModeChoice = document.getElementsByName('directionMode');
         for (var i = 0, length = directionModeChoice.length; i < length; i++) {
-            if (modelChoice[i].checked) {
+            if (directionModeChoice[i].checked) {
                 state.directionMode = directionModeChoice[i].value
                 updateReferenceImage()
                 break;
